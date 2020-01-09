@@ -15,7 +15,10 @@ public class Leilao {
 	}
 	
 	public void propoe(Lance lance) {
-		lances.add(lance);
+		if(lances.isEmpty() || !lances.get(lances.size()-1).getUsuario()
+				.equals(lance.getUsuario())) {
+			lances.add(lance);		
+		}
 	}
 
 	public String getDescricao() {
