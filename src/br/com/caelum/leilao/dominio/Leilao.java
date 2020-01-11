@@ -39,6 +39,16 @@ public class Leilao {
 	private Lance ultimoLanceDado() {
 		return lances.get(lances.size()-1);
 	}
+	
+	public void dobraLance(Usuario usuario) {
+		Lance ultimoLanceUsuario = null;
+		for(Lance l : lances) {
+			if(l.getUsuario().equals(usuario)) 
+				ultimoLanceUsuario = l;
+		}
+		Lance lanceDobrado = new Lance(usuario, ultimoLanceUsuario.getValor()*2);
+		lances.add(lanceDobrado);
+	}
 
 	public String getDescricao() {
 		return descricao;
