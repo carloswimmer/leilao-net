@@ -48,7 +48,7 @@ public class Leilao {
 		}
 		if(ultimoLanceUsuario != null) {
 			Lance lanceDobrado = new Lance(usuario, ultimoLanceUsuario.getValor()*2);
-			lances.add(lanceDobrado);
+			this.propoe(lanceDobrado);
 		}
 	}
 
