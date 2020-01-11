@@ -41,15 +41,20 @@ public class Leilao {
 	}
 	
 	public void dobraLance(Usuario usuario) {
-		Lance ultimoLanceUsuario = null;
-		for(Lance l : lances) {
-			if(l.getUsuario().equals(usuario)) 
-				ultimoLanceUsuario = l;
-		}
-		if(ultimoLanceUsuario != null) {
-			Lance lanceDobrado = new Lance(usuario, ultimoLanceUsuario.getValor()*2);
+		Lance ultimoLance = getUltimoLanceUsuario(usuario);
+		if(ultimoLance != null) {
+			Lance lanceDobrado = new Lance(usuario, ultimoLance.getValor()*2);
 			this.propoe(lanceDobrado);
 		}
+	}
+
+	private Lance getUltimoLanceUsuario(Usuario usuario) {
+		Lance ultimo = null;
+		for(Lance l : lances) {
+			if(l.getUsuario().equals(usuario)) 
+				ultimo = l;
+		}
+		return ultimo;
 	}
 
 	public String getDescricao() {
