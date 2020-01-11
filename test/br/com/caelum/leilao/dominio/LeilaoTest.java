@@ -37,6 +37,7 @@ public class LeilaoTest {
 		
 		leilao.propoe(new Lance(steveJobs, 2000.0));
 		leilao.propoe(new Lance(steveJobs, 3000.0));
+		leilao.dobraLance(steveJobs);
 		
 		assertEquals(1, leilao.getLances().size());
 		assertEquals(2000, leilao.getLances().get(0).getValor(), 0.00001);
@@ -65,6 +66,7 @@ public class LeilaoTest {
 		
 //		deve ser ignorado
 		leilao.propoe(new Lance(steveJobs, 12000.0));
+		leilao.dobraLance(steveJobs);
 		
 		assertEquals(10, leilao.getLances().size());
 		assertEquals(11000, leilao.getLances()
