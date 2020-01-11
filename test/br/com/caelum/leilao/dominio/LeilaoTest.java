@@ -88,4 +88,14 @@ public class LeilaoTest {
 		assertEquals(8000, leilao.getLances()
 				.get(leilao.getLances().size()-1).getValor(), 0.00001);
 	}
+	
+	@Test
+	public void naoDeveDobrarSemLanceAnterior() {
+		Leilao leilao = new Leilao("Camera GoPro");
+		Usuario steveJobs = new Usuario("Steve Jobs");
+		
+		leilao.dobraLance(steveJobs);
+		
+		assertEquals(0, leilao.getLances().size());
+	}
 }
