@@ -13,7 +13,7 @@ import br.com.caelum.leilao.dominio.Leilao;
 import br.com.caelum.leilao.dominio.Usuario;
 import br.com.caelum.leilao.servico.Avaliador;
 
-public class AvaliadorTeste {
+public class AvaliadorTest {
 	
 	private Avaliador leiloeiro;
 	private Usuario joao;
