@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.management.RuntimeErrorException;
+
 import br.com.caelum.leilao.dominio.Lance;
 import br.com.caelum.leilao.dominio.Leilao;
 
@@ -18,6 +20,10 @@ public class Avaliador {
 	public void avalia(Leilao leilao) {
 		double soma = 0;
 		int numeroLances = leilao.getLances().size();
+		
+		if(numeroLances == 0) {
+			throw new RuntimeException("Não é possível avaliar um leilão sem lances.");
+		}
 
 		for(Lance lance : leilao.getLances()) {
 			soma += lance.getValor();
