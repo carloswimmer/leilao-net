@@ -1,6 +1,8 @@
 package br.com.caelum.leilao.dominio;
 
 import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +20,22 @@ public class LeilaoTest {
 		billGates = new Usuario("Bill Gates");
 	}
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void naoDeveAceitarLancesDeValorIgualAZero() {
+		Leilao leilao = new CriadorDeLeilao()
+				.para("Macbook Pro")
+				.lance(billGates, 0)
+				.constroi();
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void naoDeveAceitarLancesComValorNegativo() {
+		Leilao leilao = new CriadorDeLeilao()
+				.para("Macbook Pro")
+				.lance(billGates, -100)
+				.constroi();
+	}
+	
 	@Test
 	public void deveReceberUmLance() {
 		Leilao leilao = new Leilao("Macbook Pro");
@@ -27,7 +45,7 @@ public class LeilaoTest {
 		leilao.propoe(new Lance(new Usuario("Steve Jobs"), 2000));
 		
 		assertEquals(1, leilao.getLances().size());
-		assertEquals(2000, leilao.getLances().get(0).getValor(), 0.00001);
+		assertThat(leilao.getLances(), hasItem(new Lance(steveJobs, 2000)));
 	}
 	
 	@Test
@@ -38,8 +56,10 @@ public class LeilaoTest {
 				.constroi();
 		
 		assertEquals(2, leilao.getLances().size());
-		assertEquals(2000, leilao.getLances().get(0).getValor(), 0.00001);
-		assertEquals(3000, leilao.getLances().get(1).getValor(), 0.00001);
+		assertThat(leilao.getLances(), hasItems(
+				new Lance(steveJobs, 2000),
+				new Lance(billGates, 3000)
+		));
 	}
 	
 	@Test
